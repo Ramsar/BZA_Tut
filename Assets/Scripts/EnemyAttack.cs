@@ -42,7 +42,7 @@ public class EnemyAttack : MonoBehaviour {
 		Vector3 dir = (target.transform.position - transform.position).normalized;
 		float direction = Vector3.Dot(dir, transform.forward); 
 		
-		Debug.Log(direction);
+		//Debug.Log(direction);
 		
 		
 		if (distance < 2.5f) // check if close enough for attack to hit
