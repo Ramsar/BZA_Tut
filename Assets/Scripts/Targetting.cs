@@ -76,14 +76,25 @@ public class Targetting : MonoBehaviour {
 			{
 				index = 0; 	
 			}
+			DeselectTarget();
 			selectedTarget = targets[index]; 
-			SelectTarget();
 		}
+		SelectTarget();
 	}
 	
 	// Change color of selected target
 	private void SelectTarget () {
 		selectedTarget.renderer.material.color = Color.red;
+		
+		// set target of PlayerAttack to the selected target
+		PlayerAttack pa = (PlayerAttack) GetComponent("PlayerAttack");
+		pa.target = selectedTarget.gameObject;
+	}
+	
+	// Target not selected
+	private void DeselectTarget () {
+		selectedTarget.renderer.material.color = Color.blue;
+		selectedTarget = null; 
 	}
 	
 	// Update is called once per frame
