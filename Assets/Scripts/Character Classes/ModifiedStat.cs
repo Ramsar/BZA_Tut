@@ -47,4 +47,10 @@ public class ModifiedStat : BaseStat {
 public struct ModifyingAttribute {
 	public Attribute attribute; // instance of Attribute class
 	public float ratio;			// effect of stat on attribute
+	
+	// constructor
+	public ModifyingAttribute (Attribute att, float rat) {
+		attribute = att;
+		ratio = rat;
+	}
 }
