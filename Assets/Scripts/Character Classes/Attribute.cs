@@ -18,5 +18,5 @@ public enum AttributeName {
 	Willpower,
 	Charisma
 
-	// if you want a two word attribute use underscore
+	// if you want a two word attribute use underscore (which is dropped later if you code it appropriately)
 }
