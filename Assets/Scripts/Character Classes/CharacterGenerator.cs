@@ -25,13 +25,20 @@ public class CharacterGenerator : MonoBehaviour {
 	
 	// can be used to style all elements of a type (e.g. buttons or labels) at the same time
 	// but can be temporarily put off an on by using GUI.skin = null; (see OnGUI function)
-	public GUISkin mySkin;		
+	public GUISkin mySkin;	
+	
+	//
+	public GameObject playerPrefab;
 	#endregion
 	
 	// Use this for initialization
 	void Start () {
-		_toon = new PlayerCharacter();
-		_toon.Awake();
+		GameObject pc = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		pc.name = "pc"; // set name of player prefab instance
+		
+		//_toon = new PlayerCharacter();
+		//_toon.Awake();
+		_toon = pc.GetComponent<PlayerCharacter>();
 		
 		pointsLeft = STARTING_POINTS;
 		// set all attributes to min value
@@ -57,11 +64,12 @@ public class CharacterGenerator : MonoBehaviour {
 		DisplayName();
 		DisplayPointsLeft();
 		DisplayAttributes();
-		
 		//GUI.skin = null;
 		DisplayVitals();
 		//GUI.skin = mySkin;
 		DisplaySkills();
+		
+		DisplayCreateButton();
 	}
 	
 	// Display functions called in OnGUI
@@ -152,6 +160,17 @@ public class CharacterGenerator : MonoBehaviour {
 	
 	private void DisplayPointsLeft () {
 		GUI.Label(new Rect(250, 10, 100, 25), "Points left: " + pointsLeft.ToString());
+	}
+	
+	private void DisplayCreateButton () {
+		if (GUI.Button(new Rect(Screen.width / 2 - 490,
+							statStartingPos + 10 * LINE_HEIGHT,
+							100, 
+							LINE_HEIGHT),
+							"Create"))
+		{
+			Application.LoadLevel("Targetting Example"); // can also use Application.LoadLevel(1)
+		}
 	}
 	#endregion
 }
