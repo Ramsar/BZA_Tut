@@ -71,6 +71,7 @@ public class BaseCharacter : MonoBehaviour {
 		{
 			_vital[cnt] = new Vital();
 		}
+		SetupVitalModifiers();
 	}
 	
 	private void SetupSkills () {
@@ -78,6 +79,7 @@ public class BaseCharacter : MonoBehaviour {
 		{
 			_skill[cnt] = new Skill();
 		}
+		SetupSkillModifiers();
 	}
 	
 	// Getters functions
@@ -96,14 +98,6 @@ public class BaseCharacter : MonoBehaviour {
 	//
 	private void SetupVitalModifiers () {
 		// health (half the value of constitution is assigned to health)
-// Unity 2.6 code		
-//		ModifyingAttribute health = new ModifyingAttribute();
-//		health.attribute = GetPrimaryAttribute((int)AttributeName.Constitution);
-//		health.ratio = .5f;
-//		
-//		GetVital((int)VitalName.Health).AddModifier(health);
-		
-		// Unity 3.x version
 		GetVital((int)VitalName.Health).AddModifier(new ModifyingAttribute
 			(GetPrimaryAttribute((int)AttributeName.Constitution), .5f));
 		
