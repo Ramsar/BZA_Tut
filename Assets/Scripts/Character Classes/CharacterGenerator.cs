@@ -21,6 +21,11 @@ public class CharacterGenerator : MonoBehaviour {
 	private const int BUTTON_HEIGHT = 20;
 	private int statStartingPos = 40;				//
 	
+	//public GUIStyle myStyle; 	// can be used if you want to style items separately
+	
+	// can be used to style all elements of a type (e.g. buttons or labels) at the same time
+	// but can be temporarily put off an on by using GUI.skin = null; (see OnGUI function)
+	public GUISkin mySkin;		
 	#endregion
 	
 	// Use this for initialization
@@ -47,10 +52,15 @@ public class CharacterGenerator : MonoBehaviour {
 	
 	// OnGUI
 	void OnGUI () {
+		GUI.skin = mySkin;
+		
 		DisplayName();
 		DisplayPointsLeft();
 		DisplayAttributes();
+		
+		//GUI.skin = null;
 		DisplayVitals();
+		//GUI.skin = mySkin;
 		DisplaySkills();
 	}
 	
@@ -66,11 +76,11 @@ public class CharacterGenerator : MonoBehaviour {
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++)
 		{
 			// attribute name
-			GUI.Label(new Rect(	OFFSET, 								// x
-								statStartingPos + (cnt * LINE_HEIGHT),	// y
-								STAT_LABEL_WIDTH,						// width
-								LINE_HEIGHT),							// height
-								((AttributeName)cnt).ToString());		// value	
+			GUI.Label(new Rect(	OFFSET, 									// x
+								statStartingPos + (cnt * LINE_HEIGHT),		// y
+								STAT_LABEL_WIDTH,							// width
+								LINE_HEIGHT),								// height
+								((AttributeName)cnt).ToString());	// value	
 			// attribute value
 			GUI.Label(new Rect( STAT_LABEL_WIDTH + OFFSET, 
 								statStartingPos + (cnt * LINE_HEIGHT), 
