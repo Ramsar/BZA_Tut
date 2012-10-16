@@ -41,6 +41,28 @@ public class ModifiedStat : BaseStat {
 	public void Update () {
 		CalculateModValue();
 	}
+	
+	// (assist in saving)
+	public string GetModifyingAttributesString () {
+		string temp = "";
+		
+//		UnityEngine.Debug.Log(_mods.Count);
+		
+		for (int cnt= 0; cnt < _mods.Count; cnt++)
+		{
+			temp += _mods[cnt].attribute.Name;
+			temp += "_";
+			temp += _mods[cnt].ratio;
+			
+			if (cnt < _mods.Count - 1) // if not the last modifying attribute
+				temp += "|";
+//			UnityEngine.Debug.Log(_mods[cnt].attribute.Name);
+//			UnityEngine.Debug.Log(_mods[cnt].ratio);
+			
+		}
+//		UnityEngine.Debug.Log(temp);
+		return temp;
+	}
 }
 
 // Structure: like a class, but with no methods, to hold a bunch of vars together
