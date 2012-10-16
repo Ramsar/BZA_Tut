@@ -1,10 +1,19 @@
 public class Attribute : BaseStat {
 	// inherits from BaseStat
 	
+	private string _name;
+	
 	// Default constructor
 	public Attribute () {
+		_name = "";
 		ExpToLevel = 50;
 		LevelModifier = 1.05f;
+	}
+	
+	public string Name 
+	{
+		get { return _name; }
+		set { _name = value; }
 	}
 }
 
