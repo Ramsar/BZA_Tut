@@ -69,7 +69,10 @@ public class CharacterGenerator : MonoBehaviour {
 		//GUI.skin = mySkin;
 		DisplaySkills();
 		
-		DisplayCreateButton();
+		if (_toon.Name == "" || pointsLeft > 0)	
+			DisplayCreateLabel();	// show label instead of button if there are still points left or no name is given
+		else
+			DisplayCreateButton();
 	}
 	
 	// Display functions called in OnGUI
@@ -169,8 +172,33 @@ public class CharacterGenerator : MonoBehaviour {
 							LINE_HEIGHT),
 							"Create"))
 		{
+//			GameObject gs = GameObject.Find("__GameSettings");
+//			GameSettings gsScript = gs.GetComponent<GameSettings>();
+			GameSettings gsScript = GameObject.Find("__GameSettings").GetComponent<GameSettings>();
+			
+			UpdateCurVitalValues(); // change 'cur value' of vitals to max modified value of that vital
+			
+			gsScript.SaveCharacterData();
+			
 			Application.LoadLevel("Targetting Example"); // can also use Application.LoadLevel(1)
 		}
 	}
+	
+	private void DisplayCreateLabel () {
+		GUI.Label(new Rect(Screen.width / 2 - 490,
+							statStartingPos + 10 * LINE_HEIGHT,
+							100, 
+							LINE_HEIGHT),
+							"(create)", "Button");
+	}
+	
 	#endregion
+	
+	// Change 'cur value' of vitals to max modified value of that vital
+	private void UpdateCurVitalValues () {
+		for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++)
+		{
+			_toon.GetVital(cnt).CurValue = _toon.GetVital(cnt).AdjustedBaseValue;
+		}
+	}
 }
