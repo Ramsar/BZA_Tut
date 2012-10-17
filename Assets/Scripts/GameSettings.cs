@@ -10,15 +10,6 @@ public class GameSettings : MonoBehaviour {
 		DontDestroyOnLoad(this);	
 	}
 	
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	
 	// Save character data
 	public void SaveCharacterData () {
@@ -48,8 +39,8 @@ public class GameSettings : MonoBehaviour {
 			PlayerPrefs.SetInt(((VitalName)cnt).ToString() + " - Cur Value", 
 				pcClass.GetVital(cnt).CurValue);
 			
-			PlayerPrefs.SetString(((VitalName)cnt).ToString() + " - Mods", 
-				pcClass.GetVital(cnt).GetModifyingAttributesString());
+//			PlayerPrefs.SetString(((VitalName)cnt).ToString() + " - Mods", 
+//				pcClass.GetVital(cnt).GetModifyingAttributesString());
 		}
 		
 		// Save skill parameters
@@ -60,13 +51,46 @@ public class GameSettings : MonoBehaviour {
 			PlayerPrefs.SetInt(((SkillName)cnt).ToString() + " - Exp To Level", 
 				pcClass.GetSkill(cnt).ExpToLevel);
 			
-			PlayerPrefs.SetString(((SkillName)cnt).ToString() + " - Mods", 
-				pcClass.GetSkill(cnt).GetModifyingAttributesString());
+//			PlayerPrefs.SetString(((SkillName)cnt).ToString() + " - Mods", 
+//				pcClass.GetSkill(cnt).GetModifyingAttributesString());
 		}
 	}
 	
 	// Load character data
 	public void LoadCharacterData () {
+		GameObject pc = GameObject.Find("pc");							// ref to character
+		PlayerCharacter pcClass = pc.GetComponent<PlayerCharacter>();	// ref to player character class attached to it
 		
+		pcClass.Name = PlayerPrefs.GetString("Player Name", "Name me");	// load player name	(second is default value)
+		
+		// Load attribute parameters
+		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) 
+		{
+			pcClass.GetPrimaryAttribute(cnt).BaseValue = 
+				PlayerPrefs.GetInt(((AttributeName)cnt).ToString() + " - Base Value", 0);
+			pcClass.GetPrimaryAttribute(cnt).ExpToLevel = 
+				PlayerPrefs.GetInt(((AttributeName)cnt).ToString() + " - Exp To Level", 0);
+		}
+		
+		// Load vital parameters
+		for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++) 
+		{
+			pcClass.GetVital(cnt).BaseValue = PlayerPrefs.GetInt(((VitalName)cnt).ToString() + " - Base Value", 0);
+			pcClass.GetVital(cnt).ExpToLevel = PlayerPrefs.GetInt(((VitalName)cnt).ToString() + " - Exp To Level", 0); 
+			
+			// make sure you call this so that the AdjustedBaseValue will be updated
+			// before you try to call to get the curValue
+			pcClass.GetVital(cnt).Update();
+			
+			// get the stored value for the curValue for each vital
+			pcClass.GetVital(cnt).CurValue = PlayerPrefs.GetInt(((VitalName)cnt).ToString() + " - Cur Value", 1);
+		}
+		
+		// Load skill parameters
+		for (int cnt = 0; cnt < Enum.GetValues(typeof(SkillName)).Length; cnt++) 
+		{
+			pcClass.GetSkill(cnt).BaseValue = PlayerPrefs.GetInt(((SkillName)cnt).ToString() + " - Base Value", 0);
+			pcClass.GetSkill(cnt).ExpToLevel = PlayerPrefs.GetInt(((SkillName)cnt).ToString() + " - Exp To Level", 0);
+		}
 	}
 }
