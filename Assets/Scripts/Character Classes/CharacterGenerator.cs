@@ -60,7 +60,7 @@ public class CharacterGenerator : MonoBehaviour {
 	// OnGUI
 	void OnGUI () {
 		GUI.skin = mySkin;
-		
+
 		DisplayName();
 		DisplayPointsLeft();
 		DisplayAttributes();
@@ -180,7 +180,7 @@ public class CharacterGenerator : MonoBehaviour {
 			
 			gsScript.SaveCharacterData();
 			
-			Application.LoadLevel("Targetting Example"); // can also use Application.LoadLevel(1)
+			Application.LoadLevel("Level1"); // can also use Application.LoadLevel(1)
 		}
 	}
 	
