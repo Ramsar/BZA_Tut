@@ -69,7 +69,7 @@ public class GameSettings : MonoBehaviour {
 			pcClass.GetPrimaryAttribute(cnt).BaseValue = 
 				PlayerPrefs.GetInt(((AttributeName)cnt).ToString() + " - Base Value", 0);
 			pcClass.GetPrimaryAttribute(cnt).ExpToLevel = 
-				PlayerPrefs.GetInt(((AttributeName)cnt).ToString() + " - Exp To Level", 0);
+				PlayerPrefs.GetInt(((AttributeName)cnt).ToString() + " - Exp To Level", Attribute.STARTING_EXP_COST);
 		}
 		
 		// Load vital parameters
