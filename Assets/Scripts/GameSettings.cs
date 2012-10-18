@@ -4,6 +4,9 @@ using System;
 
 public class GameSettings : MonoBehaviour {
 	
+	// this is the name of the gameobject that the player will spawn at at the start of the level
+	public const string PLAYER_SPAWN_POINT = "Player Spawn Point";		
+	
 	// Awake
 	void Awake () {
 		// tell game that this object shouldn't be destroyed on load, but passed on
