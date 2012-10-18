@@ -13,6 +13,7 @@ public class Attribute : BaseStat {
 	/// Initializes a new instance of the <see cref="Attribute"/> class.
 	/// </summary>
 	public Attribute () {
+		UnityEngine.Debug.Log("Attribute created");
 		_name = "";
 		ExpToLevel = STARTING_EXP_COST;
 		LevelModifier = 1.05f;

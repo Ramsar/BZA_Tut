@@ -3,6 +3,8 @@
 /// This is the base class for all stats in the game
 /// </summary>
 
+using UnityEngine;	// to be able to use the Debug.Log
+
 public class BaseStat {
 	
 	public const int STARTING_EXP_COST = 100;	// publicly accessible value for the cost of all base stats to start at
@@ -18,6 +20,7 @@ public class BaseStat {
 	/// i.e. a constructor
 	/// </summary>
 	public BaseStat () {
+		Debug.Log("Base stat created");
 		_baseValue = 0;
 		_buffValue = 0;
 		_levelModifier = 1.1f; 					// 10% needed to raise
