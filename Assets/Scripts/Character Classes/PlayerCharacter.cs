@@ -1,5 +1,9 @@
 public class PlayerCharacter : BaseCharacter {
-	// inherits from BaseCharacter
+
+	// Update is called once per frame
+	void Update () {
+		Messenger<int, int>.Broadcast("player health update", 80, 100);
+	}
 	
 	
 
